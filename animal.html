@@ -29,16 +29,16 @@
       "Dog": "강아지",
       "Cat": "고양이"
     };
-    
-    let model, maxPredictions;
-
-    const uploadInput = document.getElementById("image-upload");
-    const uploadLabel = document.querySelector(".upload-label");
-    const loadingMessage = document.getElementById("loading-message");
-    const imageContainer = document.getElementById("image-container");
-    const labelContainer = document.getElementById("label-container");
 
     async function init() {
+        const uploadInput = document.getElementById("image-upload");
+        const uploadLabel = document.querySelector(".upload-label");
+        const loadingMessage = document.getElementById("loading-message");
+        const imageContainer = document.getElementById("image-container");
+        const labelContainer = document.getElementById("label-container");
+        
+        let model, maxPredictions;
+
         loadingMessage.innerHTML = "AI 모델을 로딩 중입니다...";
         uploadLabel.style.display = 'block';
         const modelURL = URL + "model.json";
@@ -59,69 +59,69 @@
             loadingMessage.innerHTML = "모델을 로드하는 데 실패했습니다. 페이지를 새로고침 해주세요.";
             uploadLabel.style.display = 'none';
         }
-    }
 
-    async function previewAndPredict(event) {
-        const file = event.target.files[0];
-        if (file) {
-            imageContainer.innerHTML = '';
-            labelContainer.innerHTML = "분석 중...";
+        async function previewAndPredict(event) {
+            const file = event.target.files[0];
+            if (file) {
+                imageContainer.innerHTML = '';
+                labelContainer.innerHTML = "분석 중...";
 
-            const reader = new FileReader();
-            reader.onload = async function(e) {
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.style.width = "200px";
-                img.style.height = "200px";
-                imageContainer.appendChild(img);
-                
-                await predict(img);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    async function predict(imageElement) {
-        try {
-            const prediction = await model.predict(imageElement);
-            labelContainer.innerHTML = "";
-
-            prediction.sort((a, b) => b.probability - a.probability);
-
-            const resultHeader = document.createElement('div');
-            resultHeader.id = 'result-header';
-            const dominantClass = classTranslations[prediction[0].className] || prediction[0].className;
-            resultHeader.innerText = `결과: 당신은 ${dominantClass}상입니다!`;
-            labelContainer.appendChild(resultHeader);
-
-            for (let i = 0; i < maxPredictions; i++) {
-                const className = prediction[i].className;
-                const translatedName = classTranslations[className] || className;
-                const probability = prediction[i].probability;
-
-                const container = document.createElement('div');
-                container.classList.add('result-bar-container');
-
-                const label = document.createElement('div');
-                label.classList.add('result-label');
-                label.innerText = translatedName;
-
-                const barContainer = document.createElement('div');
-                barContainer.classList.add('progress-bar');
-                
-                const progress = document.createElement('div');
-                progress.classList.add('progress');
-                progress.style.width = `${Math.round(probability * 100)}%`;
-                progress.innerText = `${Math.round(probability * 100)}%`;
-
-                barContainer.appendChild(progress);
-                container.appendChild(label);
-                container.appendChild(barContainer);
-                labelContainer.appendChild(container);
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.style.width = "200px";
+                    img.style.height = "200px";
+                    imageContainer.appendChild(img);
+                    
+                    await predict(img);
+                };
+                reader.readAsDataURL(file);
             }
-        } catch (error) {
-            console.error("Prediction error:", error);
-            labelContainer.innerHTML = "분석에 실패했습니다. 다른 사진으로 시도해주세요.";
+        }
+
+        async function predict(imageElement) {
+            try {
+                const prediction = await model.predict(imageElement);
+                labelContainer.innerHTML = "";
+
+                prediction.sort((a, b) => b.probability - a.probability);
+
+                const resultHeader = document.createElement('div');
+                resultHeader.id = 'result-header';
+                const dominantClass = classTranslations[prediction[0].className] || prediction[0].className;
+                resultHeader.innerText = `결과: 당신은 ${dominantClass}상입니다!`;
+                labelContainer.appendChild(resultHeader);
+
+                for (let i = 0; i < maxPredictions; i++) {
+                    const className = prediction[i].className;
+                    const translatedName = classTranslations[className] || className;
+                    const probability = prediction[i].probability;
+
+                    const container = document.createElement('div');
+                    container.classList.add('result-bar-container');
+
+                    const label = document.createElement('div');
+                    label.classList.add('result-label');
+                    label.innerText = translatedName;
+
+                    const barContainer = document.createElement('div');
+                    barContainer.classList.add('progress-bar');
+                    
+                    const progress = document.createElement('div');
+                    progress.classList.add('progress');
+                    progress.style.width = `${Math.round(probability * 100)}%`;
+                    progress.innerText = `${Math.round(probability * 100)}%`;
+
+                    barContainer.appendChild(progress);
+                    container.appendChild(label);
+                    container.appendChild(barContainer);
+                    labelContainer.appendChild(container);
+                }
+            } catch (error) {
+                console.error("Prediction error:", error);
+                labelContainer.innerHTML = "분석에 실패했습니다. 다른 사진으로 시도해주세요.";
+            }
         }
     }
 
