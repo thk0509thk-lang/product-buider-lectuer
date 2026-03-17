@@ -39,27 +39,6 @@
         
         let model, maxPredictions;
 
-        loadingMessage.innerHTML = "AI 모델을 로딩 중입니다...";
-        uploadLabel.style.display = 'block';
-        const modelURL = URL + "model.json";
-        const metadataURL = URL + "metadata.json";
-
-        try {
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
-            
-            uploadInput.disabled = false;
-            uploadLabel.innerText = "이미지 선택";
-            uploadLabel.style.cursor = "pointer";
-            loadingMessage.innerHTML = "";
-            uploadInput.addEventListener("change", previewAndPredict);
-
-        } catch (error) {
-            console.error("Error loading model:", error);
-            loadingMessage.innerHTML = "모델을 로드하는 데 실패했습니다. 페이지를 새로고침 해주세요.";
-            uploadLabel.style.display = 'none';
-        }
-
         async function previewAndPredict(event) {
             const file = event.target.files[0];
             if (file) {
@@ -122,6 +101,27 @@
                 console.error("Prediction error:", error);
                 labelContainer.innerHTML = "분석에 실패했습니다. 다른 사진으로 시도해주세요.";
             }
+        }
+
+        loadingMessage.innerHTML = "AI 모델을 로딩 중입니다...";
+        uploadLabel.style.display = 'block';
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        try {
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+            
+            uploadInput.disabled = false;
+            uploadLabel.innerText = "이미지 선택";
+            uploadLabel.style.cursor = "pointer";
+            loadingMessage.innerHTML = "";
+            uploadInput.addEventListener("change", previewAndPredict);
+
+        } catch (error) {
+            console.error("Error loading model:", error);
+            loadingMessage.innerHTML = "모델을 로드하는 데 실패했습니다. 페이지를 새로고침 해주세요.";
+            uploadLabel.style.display = 'none';
         }
     }
 
