@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Animal Face Test</title>
+  <title>동물상 테스트</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -11,10 +11,10 @@
 </head>
 <body>
   <div class="container">
-    <a href="/" class="back-button">Back to Main</a>
-    <h1>Animal Face Test</h1>
-    <p>Upload an image to see if you have a dog or cat face!</p>
-    <label for="image-upload" class="upload-label">Choose Image</label>
+    <a href="/" class="back-button">메인으로 돌아가기</a>
+    <h1>동물상 테스트</h1>
+    <p>당신은 강아지상일까요, 고양이상일까요?</p>
+    <label for="image-upload" class="upload-label">이미지 선택</label>
     <input type="file" id="image-upload" accept="image/*" onchange="previewAndPredict(event)">
     <div id="image-container" style="margin-top: 20px;"></div>
     <div id="label-container"></div>
@@ -25,6 +25,11 @@
   <script type="text/javascript">
     const URL = "./my_model/";
     let model, labelContainer, maxPredictions;
+
+    const classTranslations = {
+      "Dog": "강아지",
+      "Cat": "고양이"
+    };
 
     async function loadModel() {
         const modelURL = URL + "model.json";
@@ -63,8 +68,10 @@
     async function predict(imageElement) {
         const prediction = await model.predict(imageElement);
         for (let i = 0; i < maxPredictions; i++) {
+            const className = prediction[i].className;
+            const translatedName = classTranslations[className] || className;
             const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                `${translatedName}: ${prediction[i].probability.toFixed(2)}`;
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
     }

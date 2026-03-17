@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lotto Number Generator</title>
+  <title>로또 번호 생성기</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -11,40 +11,40 @@
 </head>
 <body>
   <div class="container">
-    <button id="theme-toggle">Toggle Theme</button>
-    <h1>Lotto Number Generator</h1>
-    <p>Click the button to generate your lucky numbers!</p>
-    <button id="generator-btn">Generate Numbers</button>
+    <button id="theme-toggle">테마 변경</button>
+    <h1>로또 번호 생성기</h1>
+    <p>버튼을 눌러 행운의 번호를 받아보세요!</p>
+    <button id="generator-btn">번호 생성</button>
     <div id="lotto-numbers"></div>
   </div>
 
   <div class="container">
-    <h2>Animal Face Test</h2>
-    <p>Find out if you have a dog or cat face!</p>
-    <a href="/animal.html" class="button">Start Test</a>
+    <h2>동물상 테스트</h2>
+    <p>당신은 강아지상일까요, 고양이상일까요?</p>
+    <a href="/animal.html" class="button">테스트 시작</a>
   </div>
 
   <div class="container" id="contact-form">
-    <h2>로또 번호 추천</h2>
+    <h2>제휴 문의</h2>
     <form action="https://formspree.io/f/xeerpowk" method="POST">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">이름</label>
         <input type="text" id="name" name="name" required>
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">이메일</label>
         <input type="email" id="email" name="email" required>
       </div>
       <div class="form-group">
-        <label for="message">Message</label>
+        <label for="message">메시지</label>
         <textarea id="message" name="message" rows="5" required></textarea>
       </div>
-      <button type="submit" id="submit-btn">Send</button>
+      <button type="submit" id="submit-btn">전송</button>
     </form>
   </div>
 
   <div class="container">
-    <h2>Comments</h2>
+    <h2>댓글</h2>
     <div id="disqus_thread"></div>
     <script>
         /**
