@@ -8,6 +8,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
   <link href='/style.css' rel='stylesheet'>
+  <style>
+    #result-header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .result-bar-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .result-label {
+      width: 80px;
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      height: 20px;
+      overflow: hidden;
+    }
+    .progress {
+      background-color: #4caf50;
+      height: 100%;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -17,8 +48,8 @@
     <label for="image-upload" class="upload-label">AI 모델 로딩 중...</label>
     <input type="file" id="image-upload" accept="image/*" disabled>
     <div id="image-container" style="margin-top: 20px;"></div>
-    <div id="label-container"></div>
     <div id="loading-message"></div>
+    <div id="label-container"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -35,16 +66,18 @@
     const uploadInput = document.getElementById("image-upload");
     const uploadLabel = document.querySelector(".upload-label");
     const loadingMessage = document.getElementById("loading-message");
+    const imageContainer = document.getElementById("image-container");
+    labelContainer = document.getElementById("label-container");
 
     async function init() {
         loadingMessage.innerHTML = "AI 모델을 로딩 중입니다...";
+        uploadLabel.style.display = 'block';
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
         
         try {
             model = await tmImage.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
-            labelContainer = document.getElementById("label-container");
             
             uploadInput.disabled = false;
             uploadLabel.innerText = "이미지 선택";
@@ -54,6 +87,7 @@
         } catch (error) {
             console.error("Error loading model:", error);
             loadingMessage.innerHTML = "모델을 로드하는 데 실패했습니다. 페이지를 새로고침 해주세요.";
+            uploadLabel.style.display = 'none';
         }
     }
 
@@ -62,7 +96,6 @@
         if (file) {
             const reader = new FileReader();
             reader.onload = async function(e) {
-                const imageContainer = document.getElementById("image-container");
                 imageContainer.innerHTML = '';
                 const img = document.createElement("img");
                 img.src = e.target.result;
@@ -80,14 +113,39 @@
     async function predict(imageElement) {
         const prediction = await model.predict(imageElement);
         labelContainer.innerHTML = "";
+
+        prediction.sort((a, b) => b.probability - a.probability);
+
+        const resultHeader = document.createElement('div');
+        resultHeader.id = 'result-header';
+        const dominantClass = classTranslations[prediction[0].className] || prediction[0].className;
+        resultHeader.innerText = `결과: 당신은 ${dominantClass}상입니다!`;
+        labelContainer.appendChild(resultHeader);
+
         for (let i = 0; i < maxPredictions; i++) {
-            const div = document.createElement("div");
             const className = prediction[i].className;
             const translatedName = classTranslations[className] || className;
-            const probability = prediction[i].probability.toFixed(2);
+            const probability = prediction[i].probability;
+
+            const container = document.createElement('div');
+            container.classList.add('result-bar-container');
+
+            const label = document.createElement('div');
+            label.classList.add('result-label');
+            label.innerText = translatedName;
+
+            const barContainer = document.createElement('div');
+            barContainer.classList.add('progress-bar');
             
-            div.innerHTML = `${translatedName}: ${Math.round(probability * 100)}%`;
-            labelContainer.appendChild(div);
+            const progress = document.createElement('div');
+            progress.classList.add('progress');
+            progress.style.width = `${Math.round(probability * 100)}%`;
+            progress.innerText = `${Math.round(probability * 100)}%`;
+
+            barContainer.appendChild(progress);
+            container.appendChild(label);
+            container.appendChild(barContainer);
+            labelContainer.appendChild(container);
         }
     }
 
