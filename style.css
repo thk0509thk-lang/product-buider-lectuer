@@ -64,7 +64,7 @@ p {
   color: #aaa;
 }
 
-#generator-btn, #submit-btn { 
+#generator-btn, #submit-btn, button {
   background-color: #4CAF50;
   color: white;
   padding: 15px 32px;
@@ -79,10 +79,9 @@ p {
   transition: background-color 0.3s;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  width: 100%; 
 }
 
-#generator-btn:hover, #submit-btn:hover { 
+#generator-btn:hover, #submit-btn:hover, button:hover {
   background-color: #45a049;
 }
 
@@ -156,4 +155,36 @@ p {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dark-mode .back-button {
+  background-color: #444;
+  color: #f0f2f5;
+}
+
+#webcam-container {
+  margin-top: 20px;
+  border: 2px solid #ccc;
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#label-container {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
 }
