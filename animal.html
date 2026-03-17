@@ -31,7 +31,7 @@
       "Cat": "고양이"
     };
 
-    async function loadModel() {
+    async function init() {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
         model = await tmImage.load(modelURL, metadataURL);
@@ -43,10 +43,6 @@
     }
 
     async function previewAndPredict(event) {
-        if (!model) {
-            await loadModel();
-        }
-
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -75,6 +71,8 @@
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
     }
+
+    init();
   </script>
 </body>
 </html>
