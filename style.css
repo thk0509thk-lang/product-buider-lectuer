@@ -1,8 +1,31 @@
 body {
   text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+#theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+#generator-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 #lotto-numbers {
-  margin-top: 20px;
-  font-size: 24px;
+  margin-top: 30px;
+  font-size: 28px;
+  font-weight: bold;
 }
