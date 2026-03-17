@@ -38,6 +38,19 @@ generatorBtn.addEventListener('click', () => {
           const ball = document.createElement('div');
           ball.className = 'lotto-ball';
           ball.textContent = number;
+
+          if (number <= 10) {
+            ball.classList.add('green-ball');
+          } else if (number <= 20) {
+            ball.classList.add('blue-ball');
+          } else if (number <= 30) {
+            ball.classList.add('red-ball');
+          } else if (number <= 40) {
+            ball.classList.add('orange-ball');
+          } else {
+            ball.classList.add('purple-ball');
+          }
+
           setDiv.appendChild(ball);
         }, index * 100);
       });

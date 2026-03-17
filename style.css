@@ -96,24 +96,26 @@ p {
 }
 
 .lotto-ball {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #4CAF50;
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
-  animation: reveal 0.5s ease-out forwards;
-  opacity: 0;
-  transform: scale(0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    animation: reveal 0.5s ease-out forwards;
+    opacity: 0;
+    transform: scale(0.5);
 }
 
-.dark-mode .lotto-ball {
-  background-color: #66bb6a;
-}
+.green-ball { background-color: #4CAF50; }
+.blue-ball { background-color: #2196F3; }
+.red-ball { background-color: #F44336; }
+.orange-ball { background-color: #FF9800; }
+.purple-ball { background-color: #9C27B0; }
+
 
 @keyframes reveal {
   to {
