@@ -29,19 +29,20 @@
       "Dog": "강아지",
       "Cat": "고양이"
     };
+    
+    let model, maxPredictions;
+
+    const uploadInput = document.getElementById("image-upload");
+    const uploadLabel = document.querySelector(".upload-label");
+    const loadingMessage = document.getElementById("loading-message");
+    const imageContainer = document.getElementById("image-container");
+    const labelContainer = document.getElementById("label-container");
 
     async function init() {
-        const uploadInput = document.getElementById("image-upload");
-        const uploadLabel = document.querySelector(".upload-label");
-        const loadingMessage = document.getElementById("loading-message");
-        const labelContainer = document.getElementById("label-container");
-        
         loadingMessage.innerHTML = "AI 모델을 로딩 중입니다...";
         uploadLabel.style.display = 'block';
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
-        
-        let model, maxPredictions;
 
         try {
             model = await tmImage.load(modelURL, metadataURL);
@@ -51,35 +52,37 @@
             uploadLabel.innerText = "이미지 선택";
             uploadLabel.style.cursor = "pointer";
             loadingMessage.innerHTML = "";
+            uploadInput.addEventListener("change", previewAndPredict);
 
         } catch (error) {
             console.error("Error loading model:", error);
             loadingMessage.innerHTML = "모델을 로드하는 데 실패했습니다. 페이지를 새로고침 해주세요.";
             uploadLabel.style.display = 'none';
-            return; 
         }
+    }
 
-        async function previewAndPredict(event) {
-            const imageContainer = document.getElementById("image-container");
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    imageContainer.innerHTML = '';
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
-                    img.style.width = "200px";
-                    img.style.height = "200px";
-                    imageContainer.appendChild(img);
-                    
-                    labelContainer.innerHTML = "분석 중...";
-                    await predict(img);
-                };
-                reader.readAsDataURL(file);
-            }
+    async function previewAndPredict(event) {
+        const file = event.target.files[0];
+        if (file) {
+            imageContainer.innerHTML = '';
+            labelContainer.innerHTML = "분석 중...";
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.style.width = "200px";
+                img.style.height = "200px";
+                imageContainer.appendChild(img);
+                
+                await predict(img);
+            };
+            reader.readAsDataURL(file);
         }
+    }
 
-        async function predict(imageElement) {
+    async function predict(imageElement) {
+        try {
             const prediction = await model.predict(imageElement);
             labelContainer.innerHTML = "";
 
@@ -116,9 +119,10 @@
                 container.appendChild(barContainer);
                 labelContainer.appendChild(container);
             }
+        } catch (error) {
+            console.error("Prediction error:", error);
+            labelContainer.innerHTML = "분석에 실패했습니다. 다른 사진으로 시도해주세요.";
         }
-
-        uploadInput.addEventListener("change", previewAndPredict);
     }
 
     init();
