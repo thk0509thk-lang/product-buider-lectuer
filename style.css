@@ -64,7 +64,7 @@ p {
   color: #aaa;
 }
 
-#generator-btn, #submit-btn, button, .upload-label {
+#generator-btn, #submit-btn {
   background-color: #4CAF50;
   color: white;
   padding: 15px 32px;
@@ -81,7 +81,7 @@ p {
   font-weight: 500;
 }
 
-#generator-btn:hover, #submit-btn:hover, button:hover, .upload-label:hover {
+#generator-btn:hover, #submit-btn:hover {
   background-color: #45a049;
 }
 
@@ -155,61 +155,4 @@ p {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  text-decoration: none;
-  background-color: #e0e0e0;
-  color: #333;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.dark-mode .back-button {
-  background-color: #444;
-  color: #f0f2f5;
-}
-
-#image-upload {
-  display: none; 
-}
-
-#label-container {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-#result-header {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-.result-bar-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.result-label {
-  width: 80px;
-}
-.progress-bar {
-  flex-grow: 1;
-  background-color: #e0e0e0;
-  border-radius: 5px;
-  height: 20px;
-  overflow: hidden;
-}
-.progress {
-  background-color: #4caf50;
-  height: 100%;
-  text-align: center;
-  line-height: 20px;
-  color: white;
-  border-radius: 5px;
 }
