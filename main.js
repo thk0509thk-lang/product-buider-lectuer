@@ -8,10 +8,29 @@ themeToggle.addEventListener('click', () => {
 });
 
 generatorBtn.addEventListener('click', () => {
-  const numbers = new Set();
-  while (numbers.size < 6) {
-    numbers.add(Math.floor(Math.random() * 45) + 1);
-  }
+  lottoNumbersDiv.innerHTML = '';
 
-  lottoNumbersDiv.textContent = Array.from(numbers).join(', ');
+  for (let i = 0; i < 5; i++) {
+    setTimeout(() => {
+      const numberSet = new Set();
+      while (numberSet.size < 5) {
+        numberSet.add(Math.floor(Math.random() * 45) + 1);
+      }
+      
+      const sortedNumbers = Array.from(numberSet).sort((a, b) => a - b);
+      const setDiv = document.createElement('div');
+      setDiv.className = 'lotto-set';
+
+      sortedNumbers.forEach((number, index) => {
+        setTimeout(() => {
+          const ball = document.createElement('div');
+          ball.className = 'lotto-ball';
+          ball.textContent = number;
+          setDiv.appendChild(ball);
+        }, index * 100);
+      });
+
+      lottoNumbersDiv.appendChild(setDiv);
+    }, i * 600); 
+  }
 });
