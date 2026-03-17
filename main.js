@@ -10,11 +10,23 @@ themeToggle.addEventListener('click', () => {
 generatorBtn.addEventListener('click', () => {
   lottoNumbersDiv.innerHTML = '';
 
+  const weightedNumbers = [];
+  recentWinningNumbers.flat().forEach(number => {
+      for (let i = 0; i < 3; i++) { 
+          weightedNumbers.push(number);
+      }
+  });
+
+  for (let i = 1; i <= 45; i++) {
+      weightedNumbers.push(i);
+  }
+
   for (let i = 0; i < 5; i++) {
     setTimeout(() => {
       const numberSet = new Set();
       while (numberSet.size < 5) {
-        numberSet.add(Math.floor(Math.random() * 45) + 1);
+        const randomIndex = Math.floor(Math.random() * weightedNumbers.length);
+        numberSet.add(weightedNumbers[randomIndex]);
       }
       
       const sortedNumbers = Array.from(numberSet).sort((a, b) => a - b);
@@ -31,6 +43,6 @@ generatorBtn.addEventListener('click', () => {
       });
 
       lottoNumbersDiv.appendChild(setDiv);
-    }, i * 600); 
+    }, i * 600);
   }
 });
