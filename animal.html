@@ -14,10 +14,11 @@
     <a href="/" class="back-button">메인으로 돌아가기</a>
     <h1>동물상 테스트</h1>
     <p>당신은 강아지상일까요, 고양이상일까요?</p>
-    <label for="image-upload" class="upload-label">이미지 선택</label>
-    <input type="file" id="image-upload" accept="image/*" onchange="previewAndPredict(event)">
+    <label for="image-upload" class="upload-label">AI 모델 로딩 중...</label>
+    <input type="file" id="image-upload" accept="image/*" disabled>
     <div id="image-container" style="margin-top: 20px;"></div>
     <div id="label-container"></div>
+    <div id="loading-message"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -31,14 +32,28 @@
       "Cat": "고양이"
     };
 
+    const uploadInput = document.getElementById("image-upload");
+    const uploadLabel = document.querySelector(".upload-label");
+    const loadingMessage = document.getElementById("loading-message");
+
     async function init() {
+        loadingMessage.innerHTML = "AI 모델을 로딩 중입니다...";
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
-        model = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = model.getTotalClasses();
-        labelContainer = document.getElementById("label-container");
-        for (let i = 0; i < maxPredictions; i++) {
-            labelContainer.appendChild(document.createElement("div"));
+        
+        try {
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+            labelContainer = document.getElementById("label-container");
+            
+            uploadInput.disabled = false;
+            uploadLabel.innerText = "이미지 선택";
+            uploadLabel.style.cursor = "pointer";
+            loadingMessage.innerHTML = "";
+
+        } catch (error) {
+            console.error("Error loading model:", error);
+            loadingMessage.innerHTML = "모델을 로드하는 데 실패했습니다. 페이지를 새로고침 해주세요.";
         }
     }
 
@@ -48,13 +63,14 @@
             const reader = new FileReader();
             reader.onload = async function(e) {
                 const imageContainer = document.getElementById("image-container");
-                imageContainer.innerHTML = ''; // Clear previous image
+                imageContainer.innerHTML = '';
                 const img = document.createElement("img");
                 img.src = e.target.result;
                 img.style.width = "200px";
                 img.style.height = "200px";
                 imageContainer.appendChild(img);
                 
+                labelContainer.innerHTML = "분석 중...";
                 await predict(img);
             };
             reader.readAsDataURL(file);
@@ -63,14 +79,19 @@
 
     async function predict(imageElement) {
         const prediction = await model.predict(imageElement);
+        labelContainer.innerHTML = "";
         for (let i = 0; i < maxPredictions; i++) {
+            const div = document.createElement("div");
             const className = prediction[i].className;
             const translatedName = classTranslations[className] || className;
-            const classPrediction =
-                `${translatedName}: ${prediction[i].probability.toFixed(2)}`;
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+            const probability = prediction[i].probability.toFixed(2);
+            
+            div.innerHTML = `${translatedName}: ${Math.round(probability * 100)}%`;
+            labelContainer.appendChild(div);
         }
     }
+
+    uploadInput.addEventListener("change", previewAndPredict);
 
     init();
   </script>
