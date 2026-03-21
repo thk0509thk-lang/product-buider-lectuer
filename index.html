@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>로또 번호 생성기</title>
+  <title>로또 번호 생성기 - 행운의 번호를 받아보세요</title>
+  <meta name="description" content="버튼 하나로 간편하게 로또 행운 번호를 생성해 보세요. 과학적인 분석이나 통계 데이터 없이, 순수한 무작위 시스템으로 당신의 행운을 시험해 볼 수 있습니다.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -16,13 +17,24 @@
   <div class="container">
     <button id="theme-toggle">테마 변경</button>
     <h1>로또 번호 생성기</h1>
-    <p>버튼을 눌러 행운의 번호를 받아보세요!</p>
+    <p>버튼을 눌러 행운의 번호를 받아보세요! 이 생성기는 무작위로 번호를 조합하여 제공합니다.</p>
     <button id="generator-btn">번호 생성</button>
     <div id="lotto-numbers"></div>
+    <p class="info-text">
+      본 서비스는 단순한 재미를 위해 제작되었으며, 생성된 번호가 실제 당첨과 관련이 있다는 보장은 없습니다.<br>
+      복권은 건전하게, 소액으로 즐기시는 것을 권장합니다.
+    </p>
+  </div>
+
+  <div class="container" id="about-us">
+    <h2>소개</h2>
+    <p>
+      저희 로또 번호 생성기는 사용자에게 쉽고 빠른 행운 번호 조합을 제공하기 위해 만들어졌습니다. 복잡한 과정 없이, 단 한 번의 클릭으로 6개의 숫자를 무작위로 생성하여 보여줍니다. 저희는 사용자의 즐거움을 최우선으로 생각하며, 깨끗하고 직관적인 인터페이스를 제공하기 위해 노력하고 있습니다.
+    </p>
   </div>
 
   <div class="container" id="contact-form">
-    <h2>제휴 문의</h2>
+    <h2>문의하기</h2>
     <form action="https://formspree.io/f/xeerpowk" method="POST">
       <div class="form-group">
         <label for="name">이름</label>
@@ -40,20 +52,18 @@
     </form>
   </div>
 
+  <div class="container" id="privacy-policy">
+    <h2>개인정보처리방침</h2>
+    <p>
+      본 사이트는 사용자의 개인정보를 중요시하며, 정보통신망 이용촉진 및 정보보호에 관한 법률을 준수하고 있습니다. 문의하기 기능을 통해 수집된 이름, 이메일 주소는 오직 문의 응대를 위해서만 사용되며, 제3자에게 제공되지 않습니다. 그 외에 별도의 개인정보를 수집하거나 저장하지 않습니다.
+    </p>
+  </div>
+  
   <div class="container">
     <h2>댓글</h2>
     <div id="disqus_thread"></div>
     <script>
-        /**
-        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-        /*
-        var disqus_config = function () {
-        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        */
-        (function() { // DON'T EDIT BELOW THIS LINE
+        (function() {
         var d = document, s = d.createElement('script');
         s.src = 'https://productbuilder-bhebawxd12.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
@@ -62,6 +72,17 @@
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
+  
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 로또 번호 생성기. All Rights Reserved.</p>
+      <ul class="footer-links">
+        <li><a href="#about-us">소개</a></li>
+        <li><a href="#privacy-policy">개인정보처리방침</a></li>
+        <li><a href="#contact-form">문의하기</a></li>
+      </ul>
+    </div>
+  </footer>
 
   <script defer type="text/javascript" src="/data.js"></script>
   <script defer type="text/javascript" src="/main.js"></script>

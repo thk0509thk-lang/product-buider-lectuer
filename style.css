@@ -1,158 +1,216 @@
+/* 기본 스타일 */
 body {
   font-family: 'Poppins', sans-serif;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f2f5;
-  color: #333;
-  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.6;
   margin: 0;
-  padding: 20px 0; 
-}
-
-.dark-mode {
-  background-color: #1a1a1a;
-  color: #f0f2f5;
+  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  font-size: 2.5em;
   text-align: center;
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  position: relative;
-  max-width: 500px;
-  width: 90%;
-  margin-bottom: 20px; 
-}
-
-.dark-mode .container {
-  background-color: #2c2c2c;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-}
-
-#theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  background-color: #e0e0e0;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.dark-mode #theme-toggle {
-    background-color: #444;
-    color: #f0f2f5;
-}
-
-h1, h2 { 
   margin-bottom: 10px;
 }
 
 p {
-  margin-bottom: 30px;
-  color: #666;
-}
-
-.dark-mode p {
-  color: #aaa;
+  font-size: 1.1em;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 #generator-btn, #submit-btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 8px;
+  display: block;
+  margin: 20px auto;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: bold;
   border: none;
-  transition: background-color 0.3s;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 #generator-btn:hover, #submit-btn:hover {
-  background-color: #45a049;
+  transform: translateY(-2px);
 }
 
+/* 로또 번호 스타일 */
 #lotto-numbers {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.lotto-set {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
-.lotto-ball {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    color: white;
-    font-size: 24px;
-    font-weight: 700;
-    animation: reveal 0.5s ease-out forwards;
-    opacity: 0;
-    transform: scale(0.5);
-}
-
-.green-ball { background-color: #4CAF50; }
-.blue-ball { background-color: #2196F3; }
-.red-ball { background-color: #F44336; }
-.orange-ball { background-color: #FF9800; }
-.purple-ball { background-color: #9C27B0; }
-
-#contact-form form { 
+.number-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: white;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
 }
 
-.form-group { 
-  text-align: left;
+.number-circle:hover {
+  transform: scale(1.1);
 }
 
-.form-group label { 
+/* 테마 변경 버튼 */
+#theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+/* 문의하기 폼 */
+#contact-form .form-group {
+  margin-bottom: 15px;
+}
+
+#contact-form label {
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
 }
 
-.form-group input, .form-group textarea { 
+#contact-form input, #contact-form textarea {
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
   border: 1px solid #ccc;
-  font-family: 'Poppins', sans-serif;
+  border-radius: 4px;
 }
 
-.dark-mode .form-group input, .dark-mode .form-group textarea { 
+/* 추가된 섹션 스타일 */
+.info-text {
+  font-size: 0.9em;
+  color: #888;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#about-us h2, #privacy-policy h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#about-us p, #privacy-policy p {
+  text-align: left;
+  line-height: 1.8;
+}
+
+/* 푸터 스타일 */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.footer-links li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+}
+
+/* 다크 모드 */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode .container {
+  background-color: #1e1e1e;
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+}
+
+body.dark-mode #generator-btn, body.dark-mode #submit-btn {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+body.dark-mode #generator-btn:hover, body.dark-mode #submit-btn:hover {
   background-color: #444;
-  border-color: #555;
-  color: #f0f2f5;
 }
 
+body.dark-mode #theme-toggle {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
 
-@keyframes reveal {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+body.dark-mode #contact-form input, body.dark-mode #contact-form textarea {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+body.dark-mode footer {
+  border-top-color: #333;
+}
+
+body.dark-mode .footer-links a {
+  color: #a0a0a0;
+}
+
+/* 라이트 모드 (기본값) */
+body.light-mode {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+body.light-mode .container {
+  background-color: white;
+}
+
+body.light-mode #generator-btn, body.light-mode #submit-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+body.light-mode #generator-btn:hover, body.light-mode #submit-btn:hover {
+  background-color: #2980b9;
+}
+
+body.light-mode #theme-toggle {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+body.light-mode #contact-form input, body.light-mode #contact-form textarea {
+  background-color: white;
+  color: #333;
+}
+
+body.light-mode .footer-links a {
+  color: #3498db;
 }
