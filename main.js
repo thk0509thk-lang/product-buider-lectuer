@@ -3,59 +3,73 @@ const body = document.body;
 const generatorBtn = document.getElementById('generator-btn');
 const lottoNumbersDiv = document.getElementById('lotto-numbers');
 
+// 테마 변경
 themeToggle.addEventListener('click', () => {
   body.classList.toggle('dark-mode');
+  body.classList.toggle('light-mode');
 });
 
+// 초기 테마 설정
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !body.classList.contains('light-mode')) {
+    body.classList.add('dark-mode');
+} else {
+    body.classList.add('light-mode');
+}
+
+// 로또 번호 생성
 generatorBtn.addEventListener('click', () => {
-  lottoNumbersDiv.innerHTML = '';
+  lottoNumbersDiv.innerHTML = ''; // 이전 번호 삭제
 
+  // 최근 당첨 번호에 가중치를 부여한 번호 목록 생성
   const weightedNumbers = [];
-  recentWinningNumbers.flat().forEach(number => {
-      for (let i = 0; i < 3; i++) { 
-          weightedNumbers.push(number);
-      }
-  });
+  if (typeof recentWinningNumbers !== 'undefined') {
+    recentWinningNumbers.flat().forEach(number => {
+        for (let i = 0; i < 3; i++) { // 가중치 3배
+            weightedNumbers.push(number);
+        }
+    });
+  }
 
+  // 1부터 45까지의 모든 번호 추가
   for (let i = 1; i <= 45; i++) {
       weightedNumbers.push(i);
   }
 
-  for (let i = 0; i < 5; i++) {
-    setTimeout(() => {
-      const numberSet = new Set();
-      while (numberSet.size < 5) {
-        const randomIndex = Math.floor(Math.random() * weightedNumbers.length);
-        numberSet.add(weightedNumbers[randomIndex]);
-      }
-      
-      const sortedNumbers = Array.from(numberSet).sort((a, b) => a - b);
-      const setDiv = document.createElement('div');
-      setDiv.className = 'lotto-set';
-
-      sortedNumbers.forEach((number, index) => {
-        setTimeout(() => {
-          const ball = document.createElement('div');
-          ball.className = 'lotto-ball';
-          ball.textContent = number;
-
-          if (number <= 10) {
-            ball.classList.add('green-ball');
-          } else if (number <= 20) {
-            ball.classList.add('blue-ball');
-          } else if (number <= 30) {
-            ball.classList.add('red-ball');
-          } else if (number <= 40) {
-            ball.classList.add('orange-ball');
-          } else {
-            ball.classList.add('purple-ball');
-          }
-
-          setDiv.appendChild(ball);
-        }, index * 100);
-      });
-
-      lottoNumbersDiv.appendChild(setDiv);
-    }, i * 600);
+  // 6개의 유니크한 번호 추첨
+  const numbers = new Set();
+  while (numbers.size < 6) {
+    const randomIndex = Math.floor(Math.random() * weightedNumbers.length);
+    numbers.add(weightedNumbers[randomIndex]);
   }
+
+  // 번호를 오름차순으로 정렬
+  const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+
+  // 번호를 하나씩 순차적으로 표시
+  sortedNumbers.forEach((number, index) => {
+    setTimeout(() => {
+      const numberCircle = document.createElement('div');
+      numberCircle.className = 'number-circle';
+      numberCircle.textContent = number;
+      
+      // 번호 범위에 따라 색상 지정
+      if (number <= 10) {
+        numberCircle.style.backgroundColor = '#fbc400'; // 노란색
+      } else if (number <= 20) {
+        numberCircle.style.backgroundColor = '#69c8f2'; // 파란색
+      } else if (number <= 30) {
+        numberCircle.style.backgroundColor = '#ff7272'; // 빨간색
+      } else if (number <= 40) {
+        numberCircle.style.backgroundColor = '#aaa';    // 회색
+      } else {
+        numberCircle.style.backgroundColor = '#b0d840'; // 녹색
+      }
+      numberCircle.style.color = '#fff'; // 모든 공의 글자색은 흰색
+
+      // 애니메이션 클래스 추가
+      numberCircle.classList.add('bounce-in');
+
+      lottoNumbersDiv.appendChild(numberCircle);
+    }, index * 200); // 0.2초 간격으로 표시
+  });
 });
