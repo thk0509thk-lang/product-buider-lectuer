@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>로또 번호 생성기 - 행운의 번호를 받아보세요</title>
-    <meta name="description" content="버튼 하나로 간편하게 로또 행운 번호를 생성해 보세요. 과학적인 분석이나 통계 데이터 없이, 순수한 무작위 시스템으로 당신의 행운을 시험해 볼 수 있습니다.">
+    <title>오늘의 행운 - 메뉴 추천 및 로또 번호 생성기</title>
+    <meta name="description" content="오늘 뭐 먹을지, 뭐 마실지 고민되나요? 오늘의 행운이 커피와 메뉴를 추천해 드립니다. 보너스로 로또 행운 번호까지 받아보세요!">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
 <body class="light-mode">
     <header>
         <div class="header-container">
-            <a href="/" class="logo">행운 생성기</a>
+            <a href="/" class="logo">오늘의 행운</a>
             <nav>
                 <ul>
                     <li><a href="#about-us">소개</a></li>
@@ -34,7 +34,7 @@
                     <h2>소개</h2>
                 </div>
                 <p>
-                    저희 로또 번호 생성기는 사용자에게 쉽고 빠른 행운 번호 조합을 제공하기 위해 만들어졌습니다. 복잡한 과정 없이, 단 한 번의 클릭으로 6개의 숫자를 무작위로 생성하여 보여줍니다. 저희는 사용자의 즐거움을 최우선으로 생각하며, 깨끗하고 직관적인 인터페이스를 제공하기 위해 노력하고 있습니다.
+                    저희 '오늘의 행운'은 사용자의 일상에 작은 즐거움과 편리함을 더하기 위해 만들어졌습니다. 매일 반복되는 식사 메뉴와 커피 선택의 고민을 덜어드리고, 재미로 즐길 수 있는 로또 번호 조합까지 제공합니다. 저희는 사용자의 즐거움을 최우선으로 생각하며, 깨끗하고 직관적인 인터페이스를 제공하기 위해 노력하고 있습니다.
                 </p>
             </section>
 
@@ -47,6 +47,20 @@
                     본 서비스는 단순한 재미를 위해 제작되었으며, 생성된 번호가 실제 당첨과 관련이 있다는 보장은 없습니다.<br>
                     복권은 건전하게, 소액으로 즐기시는 것을 권장합니다.
                 </p>
+            </section>
+
+            <section id="coffee-recommender" class="card recommendation-card">
+                <h2>오늘의 커피</h2>
+                <p>어떤 커피를 마실지 고민될 때, 버튼을 눌러보세요!</p>
+                <button id="coffee-btn">커피 추천받기</button>
+                <div id="coffee-result" class="recommendation-result"></div>
+            </section>
+
+            <section id="menu-recommender" class="card recommendation-card">
+                <h2>오늘의 메뉴</h2>
+                <p>점심, 저녁 메뉴 선택이 어렵다면? 버튼을 눌러보세요!</p>
+                <button id="menu-btn">메뉴 추천받기</button>
+                <div id="menu-result" class="recommendation-result"></div>
             </section>
 
             <section id="contact-form" class="card">
@@ -102,7 +116,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2024 행운 생성기. All Rights Reserved.</p>
+        <p>&copy; 2024 오늘의 행운. All Rights Reserved.</p>
         <ul class="footer-links">
             <li><a href="#about-us">소개</a></li>
             <li><a href="#privacy-policy">개인정보처리방침</a></li>

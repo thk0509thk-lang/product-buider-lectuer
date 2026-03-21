@@ -126,6 +126,7 @@ main {
   margin-bottom: 30px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   border: 1px solid var(--border-color-light);
+  text-align: center; /* 카드 안의 내용 가운데 정렬 */
 }
 
 body.dark-mode .card {
@@ -136,38 +137,32 @@ body.dark-mode .card {
 
 h1, h2 {
   margin-top: 0;
+  margin-bottom: 0.5em;
 }
 
 h1 {
   font-size: 2.8em;
-  margin-bottom: 0.5em;
-  text-align: center;
 }
 
 h2 {
-  font-size: 2em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid var(--primary-color-light);
-  padding-bottom: 0.5em;
+  font-size: 2.2em;
+  border-bottom: none;
   display: inline-block;
-}
-
-body.dark-mode h2 {
-  border-bottom-color: var(--primary-color-dark);
 }
 
 .section-title-wrapper {
     text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 /* 개인정보처리방침 토글 */
 details summary {
     cursor: pointer;
-    list-style: none; /* 기본 화살표 제거 */
+    list-style: none; 
 }
 
 details summary::-webkit-details-marker {
-    display: none; /* 크롬/사파리 화살표 제거 */
+    display: none; 
 }
 
 details > summary {
@@ -178,21 +173,17 @@ details[open] > summary {
     margin-bottom: 1rem;
 }
 
-/* 4. 로또 생성기 섹션 */
-.lotto-generator p {
-  text-align: center;
+/* 4. 기능별 카드 스타일 */
+.lotto-generator p, .recommendation-card p {
   font-size: 1.1em;
   margin-bottom: 2em;
 }
 
-#generator-btn {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 15px 20px;
-  font-size: 1.2em;
-  font-weight: 700;
+#generator-btn, #coffee-btn, #menu-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 600;
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -201,38 +192,43 @@ details[open] > summary {
   color: white;
 }
 
-#generator-btn:hover {
+#generator-btn:hover, #coffee-btn:hover, #menu-btn:hover {
   background-color: var(--primary-hover-light);
   transform: translateY(-2px);
 }
 
-body.dark-mode #generator-btn {
+body.dark-mode #generator-btn, 
+body.dark-mode #coffee-btn, 
+body.dark-mode #menu-btn {
   background-color: var(--primary-color-dark);
   color: #000;
 }
 
-body.dark-mode #generator-btn:hover {
+body.dark-mode #generator-btn:hover, 
+body.dark-mode #coffee-btn:hover, 
+body.dark-mode #menu-btn:hover {
   background-color: var(--primary-hover-dark);
 }
 
+/* 4.1 로또 번호 */
 #lotto-numbers {
   display: flex;
-  flex-direction: column; /* 세트를 세로로 나열 */
-  align-items: center; /* 가운데 정렬 */
-  margin-top: 2em;
-  gap: 20px; /* 세트 간의 간격 */
+  flex-direction: column; 
+  align-items: center; 
+  margin-top: 2.5em;
+  gap: 20px; 
   min-height: 200px;
 }
 
 .lotto-set {
     display: flex;
     justify-content: center;
-    gap: 10px; /* 번호 공 간의 간격 */
-    flex-wrap: wrap; /* 번호가 많아지면 줄바꿈 */
+    gap: 10px; 
+    flex-wrap: wrap; 
 }
 
 .number-circle {
-  width: 50px; /* 크기 살짝 줄임 */
+  width: 50px; 
   height: 50px;
   border-radius: 50%;
   font-size: 1.4em;
@@ -244,24 +240,39 @@ body.dark-mode #generator-btn:hover {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* 번호 생성 애니메이션 */
+/* 4.2 추천 결과 */
+.recommendation-result {
+    margin-top: 2.5em;
+    font-size: 2em;
+    font-weight: 700;
+    min-height: 50px;
+    color: var(--primary-color-light);
+}
+
+body.dark-mode .recommendation-result {
+    color: var(--primary-color-dark);
+}
+
+/* 애니메이션 */
 @keyframes bounce-in {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
 }
 
 .bounce-in {
   animation: bounce-in 0.4s ease-out forwards;
 }
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+}
+
 
 .info-text {
   text-align: center;
@@ -275,6 +286,10 @@ body.dark-mode .info-text {
 }
 
 /* 5. 폼 스타일 */
+#contact-form {
+    text-align: left;
+}
+
 .form-group {
   margin-bottom: 1.5em;
 }

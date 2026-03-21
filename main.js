@@ -2,6 +2,10 @@ const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 const generatorBtn = document.getElementById('generator-btn');
 const lottoNumbersDiv = document.getElementById('lotto-numbers');
+const coffeeBtn = document.getElementById('coffee-btn');
+const coffeeResultDiv = document.getElementById('coffee-result');
+const menuBtn = document.getElementById('menu-btn');
+const menuResultDiv = document.getElementById('menu-result');
 
 // 테마 변경
 themeToggle.addEventListener('click', () => {
@@ -15,6 +19,37 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 } else {
     body.classList.add('light-mode');
 }
+
+// 데이터 목록
+const coffeeList = ["아메리카노", "카페라떼", "카푸치노", "바닐라 라떼", "카라멜 마끼아또", "콜드브루", "아인슈페너", "카페모카", "에스프레소", "디카페인 커피"];
+const menuList = ["김치찌개", "된장찌개", "비빔밥", "불고기", "제육볶음", "돈까스", "초밥", "파스타", "피자", "햄버거", "샌드위치", "라면", "떡볶이", "치킨", "짜장면", "짬뽕"];
+
+// 추천 함수
+function recommend(list, resultDiv) {
+    resultDiv.innerHTML = ''; // 이전 결과 삭제
+    resultDiv.classList.remove('fade-in');
+
+    // 랜덤 아이템 선택
+    const randomIndex = Math.floor(Math.random() * list.length);
+    const selectedItem = list[randomIndex];
+
+    // 결과 표시 및 애니메이션
+    setTimeout(() => {
+        resultDiv.textContent = selectedItem;
+        resultDiv.classList.add('fade-in');
+    }, 100); // 약간의 딜레이 후 애니메이션 시작
+}
+
+// 커피 추천
+coffeeBtn.addEventListener('click', () => {
+    recommend(coffeeList, coffeeResultDiv);
+});
+
+// 메뉴 추천
+menuBtn.addEventListener('click', () => {
+    recommend(menuList, menuResultDiv);
+});
+
 
 // 로또 번호 생성
 generatorBtn.addEventListener('click', () => {
