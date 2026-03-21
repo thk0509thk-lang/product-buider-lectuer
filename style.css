@@ -217,18 +217,25 @@ body.dark-mode #generator-btn:hover {
 
 #lotto-numbers {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column; /* 세트를 세로로 나열 */
+  align-items: center; /* 가운데 정렬 */
   margin-top: 2em;
-  gap: 15px;
-  min-height: 70px;
+  gap: 20px; /* 세트 간의 간격 */
+  min-height: 200px;
+}
+
+.lotto-set {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* 번호 공 간의 간격 */
+    flex-wrap: wrap; /* 번호가 많아지면 줄바꿈 */
 }
 
 .number-circle {
-  width: 60px;
-  height: 60px;
+  width: 50px; /* 크기 살짝 줄임 */
+  height: 50px;
   border-radius: 50%;
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-weight: 700;
   color: #fff;
   display: flex;

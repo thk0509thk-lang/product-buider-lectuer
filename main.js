@@ -35,41 +35,51 @@ generatorBtn.addEventListener('click', () => {
       weightedNumbers.push(i);
   }
 
-  // 6개의 유니크한 번호 추첨
-  const numbers = new Set();
-  while (numbers.size < 6) {
-    const randomIndex = Math.floor(Math.random() * weightedNumbers.length);
-    numbers.add(weightedNumbers[randomIndex]);
-  }
-
-  // 번호를 오름차순으로 정렬
-  const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
-
-  // 번호를 하나씩 순차적으로 표시
-  sortedNumbers.forEach((number, index) => {
+  // 5개 세트의 번호를 순차적으로 생성
+  for (let i = 0; i < 5; i++) {
     setTimeout(() => {
-      const numberCircle = document.createElement('div');
-      numberCircle.className = 'number-circle';
-      numberCircle.textContent = number;
-      
-      // 번호 범위에 따라 색상 지정
-      if (number <= 10) {
-        numberCircle.style.backgroundColor = '#fbc400'; // 노란색
-      } else if (number <= 20) {
-        numberCircle.style.backgroundColor = '#69c8f2'; // 파란색
-      } else if (number <= 30) {
-        numberCircle.style.backgroundColor = '#ff7272'; // 빨간색
-      } else if (number <= 40) {
-        numberCircle.style.backgroundColor = '#aaa';    // 회색
-      } else {
-        numberCircle.style.backgroundColor = '#b0d840'; // 녹색
+      // 6개의 유니크한 번호 추첨
+      const numbers = new Set();
+      while (numbers.size < 6) {
+        const randomIndex = Math.floor(Math.random() * weightedNumbers.length);
+        numbers.add(weightedNumbers[randomIndex]);
       }
-      numberCircle.style.color = '#fff'; // 모든 공의 글자색은 흰색
 
-      // 애니메이션 클래스 추가
-      numberCircle.classList.add('bounce-in');
+      // 번호를 오름차순으로 정렬
+      const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+      
+      const setDiv = document.createElement('div');
+      setDiv.className = 'lotto-set';
 
-      lottoNumbersDiv.appendChild(numberCircle);
-    }, index * 200); // 0.2초 간격으로 표시
-  });
+      // 번호를 하나씩 순차적으로 표시
+      sortedNumbers.forEach((number, index) => {
+        setTimeout(() => {
+          const numberCircle = document.createElement('div');
+          numberCircle.className = 'number-circle';
+          numberCircle.textContent = number;
+          
+          // 번호 범위에 따라 색상 지정
+          if (number <= 10) {
+            numberCircle.style.backgroundColor = '#fbc400'; // 노란색
+          } else if (number <= 20) {
+            numberCircle.style.backgroundColor = '#69c8f2'; // 파란색
+          } else if (number <= 30) {
+            numberCircle.style.backgroundColor = '#ff7272'; // 빨간색
+          } else if (number <= 40) {
+            numberCircle.style.backgroundColor = '#aaa';    // 회색
+          } else {
+            numberCircle.style.backgroundColor = '#b0d840'; // 녹색
+          }
+          numberCircle.style.color = '#fff'; // 모든 공의 글자색은 흰색
+
+          // 애니메이션 클래스 추가
+          numberCircle.classList.add('bounce-in');
+
+          setDiv.appendChild(numberCircle);
+        }, index * 100); // 0.1초 간격으로 번호 표시
+      });
+
+      lottoNumbersDiv.appendChild(setDiv);
+    }, i * 600); // 0.6초 간격으로 세트 표시
+  }
 });
