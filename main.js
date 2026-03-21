@@ -20,11 +20,30 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
     body.classList.add('light-mode');
 }
 
-// 데이터 목록
-const coffeeList = ["아메리카노", "카페라떼", "카푸치노", "바닐라 라떼", "카라멜 마끼아또", "콜드브루", "아인슈페너", "카페모카", "에스프레소", "디카페인 커피"];
-const menuList = ["김치찌개", "된장찌개", "비빔밥", "불고기", "제육볶음", "돈까스", "초밥", "파스타", "피자", "햄버거", "샌드위치", "라면", "떡볶이", "치킨", "짜장면", "짬뽕"];
+// 데이터 목록 (객체 형태로 변경)
+const coffeeList = [
+    { name: "아메리카노", description: "에스프레소에 물을 더해 가장 기본적인 맛을 즐길 수 있는 깔끔한 커피", calories: "약 10-15 kcal" },
+    { name: "카페라떼", description: "에스프레소에 스팀 우유를 섞어 부드럽고 고소한 맛이 특징인 커피", calories: "약 180-220 kcal" },
+    { name: "카푸치노", description: "에스프레소, 우유, 그리고 풍성한 우유 거품으로 이루어져 부드러움을 극대화한 커피", calories: "약 120-160 kcal" },
+    { name: "바닐라 라떼", description: "카페라떼에 달콤한 바닐라 시럽을 추가하여 부드러움과 달콤함을 함께 즐기는 커피", calories: "약 250-300 kcal" },
+    { name: "카라멜 마끼아또", description: "달콤한 카라멜 소스와 에스프레소, 우유가 층을 이루어 달콤 쌉싸름한 맛이 매력적인 커피", calories: "약 280-340 kcal" },
+    { name: "콜드브루", description: "차가운 물에 오랜 시간 우려내 쓴맛이 적고 부드러운 풍미가 특징인 커피", calories: "약 5-10 kcal" }
+];
 
-// 추천 함수
+const menuList = [
+    { name: "김치찌개", description: "한국인의 소울푸드! 잘 익은 김치와 돼지고기를 넣어 얼큰하고 개운하게 끓여낸 찌개", calories: "약 450-600 kcal" },
+    { name: "된장찌개", description: "구수한 된장을 베이스로 두부, 애호박 등 다양한 채소를 넣어 끓인 건강하고 든든한 찌개", calories: "약 400-550 kcal" },
+    { name: "비빔밥", description: "다양한 나물과 고기, 계란을 고추장 또는 간장 양념으로 비벼 먹는 균형 잡힌 한 끼 식사", calories: "약 550-700 kcal" },
+    { name: "불고기", description: "얇게 썬 소고기를 달콤한 간장 양념에 재워 야채와 함께 볶거나 구워 먹는 요리", calories: "약 600-750 kcal" },
+    { name: "제육볶음", description: "돼지고기를 매콤한 고추장 양념에 재워 볶아낸 요리로, 입맛을 돋우는 최고의 밥도둑", calories: "약 550-700 kcal" },
+    { name: "돈까스", description: "두툼한 돼지고기를 바삭하게 튀겨내 달콤한 소스와 함께 먹는, 남녀노소 모두가 사랑하는 메뉴", calories: "약 700-900 kcal" },
+    { name: "초밥", description: "신선한 해산물을 식초로 간을 한 밥 위에 얹어 먹는, 깔끔하고 다채로운 맛의 향연", calories: "약 40-70 kcal (1개)" },
+    { name: "파스타", description: "토마토, 크림, 오일 등 다양한 소스와 면이 어우러져 만들어내는 이탈리아의 대표 요리", calories: "약 600-900 kcal" },
+    { name: "피자", description: "쫄깃한 도우 위에 다채로운 토핑과 치즈를 얹어 구워낸, 함께 즐기기 좋은 파티 음식", calories: "약 250-400 kcal (1조각)" },
+    { name: "치킨", description: "바삭한 튀김 옷과 촉촉한 속살의 완벽한 조화! 스트레스를 한 방에 날려주는 국민 간식", calories: "약 250-350 kcal (1조각)" }
+];
+
+// 추천 함수 수정
 function recommend(list, resultDiv) {
     resultDiv.innerHTML = ''; // 이전 결과 삭제
     resultDiv.classList.remove('fade-in');
@@ -35,7 +54,22 @@ function recommend(list, resultDiv) {
 
     // 결과 표시 및 애니메이션
     setTimeout(() => {
-        resultDiv.textContent = selectedItem;
+        // 동적으로 HTML 구조 생성
+        const nameElement = document.createElement('h3');
+        nameElement.textContent = selectedItem.name;
+
+        const descElement = document.createElement('p');
+        descElement.className = 'recommend-description';
+        descElement.textContent = selectedItem.description;
+
+        const calElement = document.createElement('p');
+        calElement.className = 'recommend-calories';
+        calElement.textContent = `칼로리: ${selectedItem.calories}`;
+
+        resultDiv.appendChild(nameElement);
+        resultDiv.appendChild(descElement);
+        resultDiv.appendChild(calElement);
+        
         resultDiv.classList.add('fade-in');
     }, 100); // 약간의 딜레이 후 애니메이션 시작
 }

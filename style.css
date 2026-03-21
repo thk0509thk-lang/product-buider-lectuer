@@ -135,7 +135,7 @@ body.dark-mode .card {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-h1, h2 {
+h1, h2, h3 {
   margin-top: 0;
   margin-bottom: 0.5em;
 }
@@ -243,14 +243,40 @@ body.dark-mode #menu-btn:hover {
 /* 4.2 추천 결과 */
 .recommendation-result {
     margin-top: 2.5em;
-    font-size: 2em;
-    font-weight: 700;
-    min-height: 50px;
-    color: var(--primary-color-light);
+    min-height: 120px; /* 충분한 높이 확보 */
+    text-align: center;
 }
 
-body.dark-mode .recommendation-result {
+.recommendation-result h3 {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--primary-color-light);
+    margin-bottom: 0.5em;
+}
+
+body.dark-mode .recommendation-result h3 {
     color: var(--primary-color-dark);
+}
+
+.recommend-description {
+    font-size: 1.1em;
+    margin: 0.5em 0;
+    color: #495057;
+}
+
+body.dark-mode .recommend-description {
+    color: #adb5bd;
+}
+
+.recommend-calories {
+    font-size: 1em;
+    font-weight: 500;
+    color: #6c757d;
+    margin-top: 0.8em;
+}
+
+body.dark-mode .recommend-calories {
+    color: #ced4da;
 }
 
 /* 애니메이션 */
