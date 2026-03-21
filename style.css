@@ -160,6 +160,24 @@ body.dark-mode h2 {
     text-align: center;
 }
 
+/* 개인정보처리방침 토글 */
+details summary {
+    cursor: pointer;
+    list-style: none; /* 기본 화살표 제거 */
+}
+
+details summary::-webkit-details-marker {
+    display: none; /* 크롬/사파리 화살표 제거 */
+}
+
+details > summary {
+    padding: 0;
+}
+
+details[open] > summary {
+    margin-bottom: 1rem;
+}
+
 /* 4. 로또 생성기 섹션 */
 .lotto-generator p {
   text-align: center;
