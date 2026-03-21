@@ -1,216 +1,323 @@
-/* 기본 스타일 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/* 1. 기본 및 다크/라이트 모드 설정 */
+:root {
+  --bg-color-light: #f8f9fa;
+  --text-color-light: #212529;
+  --card-bg-light: #ffffff;
+  --border-color-light: #dee2e6;
+  --primary-color-light: #007bff;
+  --primary-hover-light: #0056b3;
+
+  --bg-color-dark: #121212;
+  --text-color-dark: #e9ecef;
+  --card-bg-dark: #1e1e1e;
+  --border-color-dark: #495057;
+  --primary-color-dark: #4dabf7;
+  --primary-hover-dark: #1c7ed6;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.6;
+  font-family: 'Noto Sans KR', sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  line-height: 1.7;
   transition: background-color 0.3s, color 0.3s;
 }
 
-.container {
+body.light-mode {
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
+}
+
+body.dark-mode {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+/* 2. 헤더 및 네비게이션 */
+header {
+  background-color: transparent;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color-light);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+body.dark-mode header {
+  border-bottom-color: var(--border-color-dark);
+}
+
+.header-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+nav li {
+  margin-left: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: var(--primary-color-light);
+}
+
+body.dark-mode nav a:hover {
+  color: var(--primary-color-dark);
+}
+
+/* 테마 토글 버튼 */
+#theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color-light);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+body.dark-mode #theme-toggle {
+  border-color: var(--border-color-dark);
+}
+
+/* 3. 메인 콘텐츠 영역 */
+main {
+  padding: 40px 20px;
+}
+
+.content-wrapper {
   max-width: 800px;
-  margin: 0 auto 30px auto;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin: 0 auto;
+}
+
+.card {
+  background-color: var(--card-bg-light);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color-light);
+}
+
+body.dark-mode .card {
+  background-color: var(--card-bg-dark);
+  border-color: var(--border-color-dark);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+  margin-top: 0;
 }
 
 h1 {
-  font-size: 2.5em;
-  text-align: center;
-  margin-bottom: 10px;
+  font-size: 2.8em;
+  margin-bottom: 0.5em;
 }
 
-p {
+h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid var(--primary-color-light);
+  padding-bottom: 0.5em;
+  display: inline-block;
+}
+
+body.dark-mode h2 {
+  border-bottom-color: var(--primary-color-dark);
+}
+
+.section-title-wrapper {
+    text-align: center;
+}
+
+/* 4. 로또 생성기 섹션 */
+.lotto-generator p {
+  text-align: center;
   font-size: 1.1em;
-  text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2em;
 }
 
-#generator-btn, #submit-btn {
+#generator-btn {
   display: block;
-  margin: 20px auto;
-  padding: 15px 30px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 15px 20px;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 700;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
+  background-color: var(--primary-color-light);
+  color: white;
 }
 
-#generator-btn:hover, #submit-btn:hover {
+#generator-btn:hover {
+  background-color: var(--primary-hover-light);
   transform: translateY(-2px);
 }
 
-/* 로또 번호 스타일 */
+body.dark-mode #generator-btn {
+  background-color: var(--primary-color-dark);
+}
+
+body.dark-mode #generator-btn:hover {
+  background-color: var(--primary-hover-dark);
+}
+
 #lotto-numbers {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 2em;
+  gap: 15px;
 }
 
 .number-circle {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  color: white;
+  font-size: 1.6em;
+  font-weight: 700;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 1.8em;
-  font-weight: bold;
-  margin: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.number-circle:hover {
-  transform: scale(1.1);
-}
-
-/* 테마 변경 버튼 */
-#theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.info-text {
+  text-align: center;
   font-size: 0.9em;
+  color: #6c757d;
+  margin-top: 2em;
 }
 
-/* 문의하기 폼 */
-#contact-form .form-group {
-  margin-bottom: 15px;
+body.dark-mode .info-text {
+    color: #adb5bd;
 }
 
-#contact-form label {
+/* 5. 폼 스타일 */
+.form-group {
+  margin-bottom: 1.5em;
+}
+
+label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5em;
   font-weight: 500;
 }
 
-#contact-form input, #contact-form textarea {
+input[type="text"], input[type="email"], textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid var(--border-color-light);
+  border-radius: 6px;
+  font-size: 1em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: var(--card-bg-light);
+  color: var(--text-color-light);
 }
 
-/* 추가된 섹션 스타일 */
-.info-text {
-  font-size: 0.9em;
-  color: #888;
-  text-align: center;
-  margin-top: 30px;
+body.dark-mode input[type="text"], 
+body.dark-mode input[type="email"], 
+body.dark-mode textarea {
+  border-color: var(--border-color-dark);
+  background-color: var(--card-bg-dark);
+  color: var(--text-color-dark);
 }
 
-#about-us h2, #privacy-policy h2 {
-  text-align: center;
-  margin-bottom: 20px;
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color-light);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-#about-us p, #privacy-policy p {
-  text-align: left;
-  line-height: 1.8;
+body.dark-mode input[type="text"]:focus, 
+body.dark-mode input[type="email"]:focus, 
+body.dark-mode textarea:focus {
+  border-color: var(--primary-color-dark);
+  box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.25);
 }
 
-/* 푸터 스타일 */
+#submit-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1em;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--primary-color-light);
+  color: #fff;
+}
+
+body.dark-mode #submit-btn {
+    background-color: var(--primary-color-dark);
+}
+
+/* 6. 푸터 */
 footer {
   text-align: center;
-  padding: 20px 0;
+  padding: 30px 20px;
   margin-top: 40px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color-light);
+}
+
+body.dark-mode footer {
+    border-top-color: var(--border-color-dark);
 }
 
 .footer-links {
   list-style: none;
   padding: 0;
   margin: 10px 0 0;
-}
-
-.footer-links li {
-  display: inline;
-  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .footer-links a {
   text-decoration: none;
+  color: #6c757d;
+  transition: color 0.2s;
 }
 
-/* 다크 모드 */
-body.dark-mode {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-body.dark-mode .container {
-  background-color: #1e1e1e;
-  box-shadow: 0 0 15px rgba(255,255,255,0.05);
-}
-
-body.dark-mode #generator-btn, body.dark-mode #submit-btn {
-  background-color: #333;
-  color: #e0e0e0;
-  border: 1px solid #444;
-}
-
-body.dark-mode #generator-btn:hover, body.dark-mode #submit-btn:hover {
-  background-color: #444;
-}
-
-body.dark-mode #theme-toggle {
-  background-color: #333;
-  color: #e0e0e0;
-  border: 1px solid #444;
-}
-
-body.dark-mode #contact-form input, body.dark-mode #contact-form textarea {
-  background-color: #333;
-  color: #e0e0e0;
-  border-color: #555;
-}
-
-body.dark-mode footer {
-  border-top-color: #333;
+.footer-links a:hover {
+    color: var(--primary-color-light);
 }
 
 body.dark-mode .footer-links a {
-  color: #a0a0a0;
+    color: #adb5bd;
 }
 
-/* 라이트 모드 (기본값) */
-body.light-mode {
-  background-color: #f4f4f4;
-  color: #333;
-}
-
-body.light-mode .container {
-  background-color: white;
-}
-
-body.light-mode #generator-btn, body.light-mode #submit-btn {
-  background-color: #3498db;
-  color: white;
-}
-
-body.light-mode #generator-btn:hover, body.light-mode #submit-btn:hover {
-  background-color: #2980b9;
-}
-
-body.light-mode #theme-toggle {
-  background-color: #e0e0e0;
-  color: #333;
-}
-
-body.light-mode #contact-form input, body.light-mode #contact-form textarea {
-  background-color: white;
-  color: #333;
-}
-
-body.light-mode .footer-links a {
-  color: #3498db;
+body.dark-mode .footer-links a:hover {
+    color: var(--primary-color-dark);
 }
